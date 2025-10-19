@@ -15,10 +15,12 @@ public class UseCasesConfig {
     CreateNewsletter createNewsletter(
         List<NewsClient> newsClient,
         @Qualifier("summaryAgent") Agent summaryAgent,
-        @Qualifier("newsletterAgent") Agent newsletterAgent
+        @Qualifier("newsletterAgent") Agent newsletterAgent,
+        @Qualifier("sourceFetcherAgent") Agent sourceFetcherAgent
     ) {
         return new CreateNewsletter(
             newsClient,
+            sourceFetcherAgent,
             summaryAgent,
             newsletterAgent
         );

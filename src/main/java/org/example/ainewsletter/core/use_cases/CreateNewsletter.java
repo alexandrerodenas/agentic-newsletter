@@ -13,23 +13,26 @@ import org.example.ainewsletter.core.model.news.NewsClient;
 public final class CreateNewsletter {
 
     private final List<NewsClient> newsClients;
+    private final Agent sourceFetcherAgent;
     private final Agent summaryAgent;
     private final Agent newsletterAgent;
 
     public CreateNewsletter(
         final List<NewsClient> newsClients,
+        final Agent sourceFetcherAgent,
         final Agent summaryAgent,
         final Agent newsletterAgent
     ) {
         this.newsClients = newsClients;
+        this.sourceFetcherAgent = sourceFetcherAgent;
         this.summaryAgent = summaryAgent;
         this.newsletterAgent = newsletterAgent;
-        log.info("FetchNews use case initialized with {} news clients", newsClients.size());
-        log.info("News Agent initialized: {}", summaryAgent.getClass().getSimpleName());
+        log.info("CreateNewsletter use case initialized with {} news clients", newsClients.size());
     }
 
-    public String apply() {
+    public String createForSubject(String subject) {
         log.info("Starting news aggregation from {} clients", newsClients.size());
+        final AgentOutput<?> sources = sourceFetcherAgent.execute(new AgentInput<>(subject));
 
         final List<News> allNews = newsClients.stream()
             .map(NewsClient::fetch)

@@ -4,6 +4,7 @@ import lombok.NonNull;
 import org.example.ainewsletter.core.use_cases.CreateNewsletter;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,7 +18,8 @@ public final class NewsController {
 
 
     @GetMapping(value = "/newsletter", produces = MediaType.TEXT_HTML_VALUE)
-    public String getNews() {
-        return createNewsletter.apply();
+    public String getNews(@RequestParam String subject) {
+        return createNewsletter.createForSubject(subject);
     }
+
 }

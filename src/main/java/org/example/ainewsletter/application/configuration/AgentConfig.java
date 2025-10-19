@@ -1,15 +1,22 @@
 package org.example.ainewsletter.application.configuration;
 
+import java.util.List;
 import org.example.ainewsletter.core.model.agent.Agent;
+import org.example.ainewsletter.core.model.agent.AgentInput;
+import org.example.ainewsletter.infra.agent.OllamaWebSearch;
 import org.example.ainewsletter.infra.agent.PromptProvider;
 import org.example.ainewsletter.infra.agent.BasicAgent;
+import org.example.ainewsletter.infra.agent.ToolAgent;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.tool.ToolCallback;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestClient;
 
 @Configuration
 public class AgentConfig {
@@ -139,7 +146,7 @@ public class AgentConfig {
     }
 
     @Bean
-    PromptProvider newsletterHtmlPromptProvider() {
+    PromptProvider newsletterPromptProvider() {
         final String system = """
             Tu es un assistant spécialisé en conception d'interfaces HTML modernes pour newsletters.
             Ton rôle est de transformer du contenu Markdown ou structuré en HTML complet, prêt à être intégré dans un email ou une page web.
@@ -382,8 +389,38 @@ public class AgentConfig {
 
     @Bean
     @Qualifier("newsletterAgent")
-    Agent newsletterAgent(PromptProvider newsletterHtmlPromptProvider, ChatModel chatModel) {
-        return new BasicAgent("Newsletter", newsletterHtmlPromptProvider, chatModel);
+    Agent newsletterAgent(PromptProvider newsletterPromptProvider, ChatModel chatModel) {
+        return new BasicAgent("Newsletter", newsletterPromptProvider, chatModel);
+    }
+
+    @Bean
+    @Qualifier("sourceFetcherAgent")
+    Agent sourceFetcherAgent(
+        ChatModel chatModel,
+        ToolCallback ollamaWebSearch
+    ) {
+        final String system = """
+            Tu utilises l'outil de recherche web pour répondre à la question posée par l'utilisateur.
+            """;
+        final String user = """
+            Liste les flux rss technologiques les plus pertinents pour recueillir des articles récents sur le sujet suivant :
+
+            %s
+
+            Fournis uniquement les URLs des flux rss, une par ligne, sans autre texte. Pas besoin d'explications.
+            """;
+
+        final PromptProvider promptProvider = (data) -> new Prompt(
+            new SystemMessage(system),
+            new UserMessage(user.formatted(data))
+        );
+
+        return new ToolAgent(
+            "Source Fetcher",
+            promptProvider,
+            chatModel,
+            List.of(ollamaWebSearch)
+        );
     }
 
 

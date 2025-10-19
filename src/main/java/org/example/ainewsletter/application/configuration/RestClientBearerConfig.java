@@ -8,7 +8,6 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class RestClientBearerConfig {
 
-
     @Bean
     public RestClient.Builder restClientBuilder(
         @Value("${spring.ai.ollama.api-key}") String token
