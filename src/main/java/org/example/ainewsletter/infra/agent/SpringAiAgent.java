@@ -31,7 +31,7 @@ public final class SpringAiAgent implements Agent {
         this.chatModel = chatModel;
     }
 
-    public AgentOutput execute(final AgentInput agentInput) {
+    public AgentOutput execute(final AgentInput<?> agentInput) {
         log.debug("Submitting input to agent {}", name);
         final ChatResponse response = chatModel.call(
             promptProvider.apply(agentInput)

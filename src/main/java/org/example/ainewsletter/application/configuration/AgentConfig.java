@@ -32,12 +32,9 @@ public class AgentConfig {
                 # Titre du fil d'actualité avec le thème
                 
                 (pour chaque article)
-                ## Titre de l'article ([date de l'article])
+                ### Titre de l'article ([date de l'article])
                 Brève phrase résumant l'article.
                 Source : [lien de l'article]
-                
-                ### Synthèse
-                Texte de la synthèse en 6-8 lignes.
                 
                 """;
         final String user = """

@@ -28,28 +28,20 @@ public final class FetchNews {
 
     public String aggregateNews() {
         log.info("Starting news aggregation from {} clients", newsClients.size());
-        final List<AgentOutput> responses = newsClients.stream()
+
+        final List<News> allNews = newsClients.stream()
             .map(NewsClient::fetch)
-            .map(newsList -> newsList.stream()
-                .sorted(Comparator.comparing(News::getPublished).reversed())
-                .toList()
-            )
-            .map(this::formatNewsList)
-            .map(AgentInput::new)
-            .map(this.newsAgent::execute)
+            .flatMap(List::stream)
+            .sorted(Comparator.comparing(News::getPublished).reversed())
             .toList();
 
-        log.info("Aggregated {} news items", responses.size());
-        return responses.stream()
-            .map(AgentOutput::content)
-            .reduce("", (a, b) -> a + "\n" + b);
-    }
+        log.info("Fetched total {} news items", allNews.size());
 
-    private String formatNewsList(List<News> newsList) {
-        return newsList.stream()
-            .map(News::toString)
-            .collect(Collectors.joining("\n------------------------------\n"));
-    }
 
+        final AgentOutput response = newsAgent.execute(new AgentInput<>(allNews));
+
+        log.info("Aggregation complete with {} items summarized", allNews.size());
+        return response.content();
+    }
 
 }
