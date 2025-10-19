@@ -11,14 +11,14 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 
 @Slf4j
-public final class SpringAiAgent implements Agent {
+public final class BasicAgent implements Agent {
 
     @Getter
     private final String name;
     private final PromptProvider promptProvider;
     private final ChatModel chatModel;
 
-    public SpringAiAgent(
+    public BasicAgent(
         @NonNull final String name,
         @NonNull final PromptProvider promptProvider,
         @NonNull final ChatModel chatModel
@@ -37,7 +37,6 @@ public final class SpringAiAgent implements Agent {
             promptProvider.apply(agentInput)
         );
         log.debug("Received response from agent {}", name.toLowerCase());
-        System.out.println(response.getResult().getOutput().getText());
         return new AgentOutput(
             this.name,
             Optional.ofNullable(

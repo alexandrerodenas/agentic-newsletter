@@ -2,7 +2,7 @@ package org.example.ainewsletter.application.configuration;
 
 import org.example.ainewsletter.core.model.agent.Agent;
 import org.example.ainewsletter.infra.agent.PromptProvider;
-import org.example.ainewsletter.infra.agent.SpringAiAgent;
+import org.example.ainewsletter.infra.agent.BasicAgent;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatModel;
@@ -135,7 +135,7 @@ public class AgentConfig {
     @Bean
     @Qualifier("summaryAgent")
     Agent summaryAgent(PromptProvider summaryPromptProvider, ChatModel chatModel) {
-        return new SpringAiAgent("Summary", summaryPromptProvider, chatModel);
+        return new BasicAgent("Summary", summaryPromptProvider, chatModel);
     }
 
     @Bean
@@ -383,7 +383,7 @@ public class AgentConfig {
     @Bean
     @Qualifier("newsletterAgent")
     Agent newsletterAgent(PromptProvider newsletterHtmlPromptProvider, ChatModel chatModel) {
-        return new SpringAiAgent("Newsletter", newsletterHtmlPromptProvider, chatModel);
+        return new BasicAgent("Newsletter", newsletterHtmlPromptProvider, chatModel);
     }
 
 
