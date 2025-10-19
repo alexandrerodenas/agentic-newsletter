@@ -1,0 +1,24 @@
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: gpt-oss:20b
+  application:
+    name: AI Newsletter
+news:
+  aggregation:
+    limit-days: 7
+  sources:
+    - url: https://korben.info/feed.xml
+      categories: IA
+    - url: https://flipboard.com/@Numerama.rss
+      categories: Intelligence artificielle
+    - url: https://ollama.com/blog/rss.xml
+
+logging:
+  level:
+    org.example: DEBUG
+
+
