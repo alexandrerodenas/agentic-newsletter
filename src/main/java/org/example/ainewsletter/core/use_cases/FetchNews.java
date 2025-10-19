@@ -1,5 +1,6 @@
 package org.example.ainewsletter.core.use_cases;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,10 @@ public final class FetchNews {
         log.info("Starting news aggregation from {} clients", newsClients.size());
         final List<AgentOutput> responses = newsClients.stream()
             .map(NewsClient::fetch)
+            .map(newsList -> newsList.stream()
+                .sorted(Comparator.comparing(News::getPublished).reversed())
+                .toList()
+            )
             .map(this::formatNewsList)
             .map(AgentInput::new)
             .map(this.newsAgent::execute)

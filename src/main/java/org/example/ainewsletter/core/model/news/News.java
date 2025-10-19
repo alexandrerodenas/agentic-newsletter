@@ -6,12 +6,14 @@ import com.rometools.rome.feed.synd.SyndEntry;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import lombok.Getter;
 import lombok.NonNull;
 import org.jsoup.parser.Parser;
 
 public final class News {
 
     private final String title;
+    @Getter
     private final LocalDate published;
     private final String description;
     private final String link;

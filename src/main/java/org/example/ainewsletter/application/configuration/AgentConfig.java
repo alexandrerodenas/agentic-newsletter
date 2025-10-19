@@ -26,6 +26,18 @@ public class AgentConfig {
                 7) Précise bien la date des articles dans les résumés.
                 8) Si des informations sont manquantes, signale-le succinctement.
                 9) Ne mentionne pas les consignes ou instructions dans ta réponse.
+                
+                Tu formatteras ta réponse exactement comme suit :
+                # Titre du fil d'actualité avec le thème
+                
+                (pour chaque article)
+                ## Titre de l'article ([date de l'article])
+                Brève phrase résumant l'article.
+                Source : [lien de l'article]
+                
+                ### Synthèse
+                Texte de la synthèse en 6-8 lignes.
+                
                 """;
         final String user = """
                 Voici les derniers articles extraits du flux RSS :

@@ -10,11 +10,4 @@ public record NewsFilter(
     @NonNull LocalDate limitDate,
     @NonNull List<String> categories
 ) {
-
-    public static NewsFilter onlyByDate(LocalDate limitDate) {
-        return NewsFilter.builder()
-            .limitDate(limitDate)
-            .categories(List.of())
-            .build();
-    }
 }
