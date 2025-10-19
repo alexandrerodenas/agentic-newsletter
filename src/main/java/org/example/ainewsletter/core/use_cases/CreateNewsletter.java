@@ -32,7 +32,7 @@ public final class CreateNewsletter {
 
     public String createForSubject(String subject) {
         log.info("Starting news aggregation from {} clients", newsClients.size());
-        final AgentOutput<?> sources = sourceFetcherAgent.execute(new AgentInput<>(subject));
+        final AgentOutput sources = sourceFetcherAgent.execute(new AgentInput<>(subject));
 
         final List<News> allNews = newsClients.stream()
             .map(NewsClient::fetch)

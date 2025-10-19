@@ -2,10 +2,8 @@ package org.example.ainewsletter.application.configuration;
 
 import java.util.List;
 import org.example.ainewsletter.core.model.agent.Agent;
-import org.example.ainewsletter.core.model.agent.AgentInput;
-import org.example.ainewsletter.infra.agent.OllamaWebSearch;
-import org.example.ainewsletter.infra.agent.PromptProvider;
 import org.example.ainewsletter.infra.agent.BasicAgent;
+import org.example.ainewsletter.infra.agent.PromptProvider;
 import org.example.ainewsletter.infra.agent.ToolAgent;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
@@ -13,10 +11,8 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestClient;
 
 @Configuration
 public class AgentConfig {
