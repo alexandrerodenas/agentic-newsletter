@@ -1,10 +1,11 @@
 spring:
   ai:
     ollama:
-      base-url: http://localhost:11434
+      base-url: https://ollama.com
+      api-key: ${OLLAMA_API_KEY}
       chat:
         options:
-          model: gemma3:12b
+          model: gpt-oss:120b
   application:
     name: AI Newsletter
 news:
