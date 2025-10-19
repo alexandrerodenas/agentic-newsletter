@@ -34,10 +34,12 @@ public final class News {
     }
 
     public static News fromSyndEntry(@NonNull final SyndEntry syndEntry) {
+        final Optional<SyndContent> descriptionContent = Optional.ofNullable(syndEntry.getDescription());
+        final Optional<SyndContent> firstContent = syndEntry.getContents().stream().findFirst();
         return new News(
             syndEntry.getTitle(),
             syndEntry.getPublishedDate().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate(),
-            Optional.of(syndEntry.getDescription())
+            descriptionContent.or(() -> firstContent)
                 .map(SyndContent::getValue)
                 .map(desc -> Parser.unescapeEntities(desc, false))
                 .orElse(""),

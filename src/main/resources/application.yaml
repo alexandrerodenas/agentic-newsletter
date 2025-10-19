@@ -4,7 +4,7 @@ spring:
       base-url: http://localhost:11434
       chat:
         options:
-          model: gpt-oss:20b
+          model: gemma3:12b
   application:
     name: AI Newsletter
 news:
@@ -16,6 +16,15 @@ news:
     - url: https://flipboard.com/@Numerama.rss
       categories: Intelligence artificielle
     - url: https://ollama.com/blog/rss.xml
+    - url: https://research.google/blog/rss/
+    - url: https://machinelearningmastery.com/blog/feed/
+    - url: https://huggingface.co/blog/feed.xml
+    - url: https://openai.com/news/rss.xml
+    - url: https://www.aitimejournal.com/feed/
+      categories: Tech
+    - url: https://news.google.com/rss/search?tbm=nws&q=intelligence+artificielle&oq=intelligence+artificielle&scoring=n&hl=fr&gl=FR&ceid=FR:fr
+    - url: "https://www.journalduhacker.net/t/intelligence artificielle.rss"
+    - url: https://www.nouvelobs.com/2049-ia-et-cybersecurite/rss.xml
 
 logging:
   level:

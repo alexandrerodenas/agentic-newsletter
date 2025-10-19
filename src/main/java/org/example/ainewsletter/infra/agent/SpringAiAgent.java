@@ -32,11 +32,11 @@ public final class SpringAiAgent implements Agent {
     }
 
     public AgentOutput execute(final AgentInput<?> agentInput) {
-        log.debug("Submitting input to agent {}", name);
+        log.debug("Submitting input to agent {}", name.toLowerCase());
         final ChatResponse response = chatModel.call(
             promptProvider.apply(agentInput)
         );
-        log.debug("Received response from agent {}", name);
+        log.debug("Received response from agent {}", name.toLowerCase());
         System.out.println(response.getResult().getOutput().getText());
         return new AgentOutput(
             this.name,
