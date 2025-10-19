@@ -16,18 +16,18 @@ import org.springframework.web.reactive.function.client.WebClient;
 public final class RssNewsClient extends NewsClient {
 
     private final WebClient webClient;
-    private final RssParser rssParser;
+    private final RssNewsParser rssNewsParser;
     private final String rssUrl;
 
     public RssNewsClient(
         final WebClient webClient,
-        final RssParser rssParser,
+        final RssNewsParser rssNewsParser,
         final String rssUrl,
         final NewsFilter newsFilter
     ) {
         super(newsFilter);
         this.webClient = webClient;
-        this.rssParser = rssParser;
+        this.rssNewsParser = rssNewsParser;
         this.rssUrl = rssUrl;
     }
 
@@ -49,7 +49,7 @@ public final class RssNewsClient extends NewsClient {
 
         final String rssXml = new String(rssBytes, StandardCharsets.UTF_8);
         try {
-            final List<News> fetchedNews = this.rssParser.parse(rssXml)
+            final List<News> fetchedNews = this.rssNewsParser.parse(rssXml)
                 .stream()
                 .filter(news -> news.isValid(this.filter))
                 .toList();

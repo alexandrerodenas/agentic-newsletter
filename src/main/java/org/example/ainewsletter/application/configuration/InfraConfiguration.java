@@ -1,11 +1,15 @@
 package org.example.ainewsletter.application.configuration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
 import java.util.List;
 import org.example.ainewsletter.core.model.news.NewsClient;
 import org.example.ainewsletter.core.model.news.NewsFilter;
+import org.example.ainewsletter.core.model.news.SourceToClient;
 import org.example.ainewsletter.infra.news.rss.RssNewsClient;
-import org.example.ainewsletter.infra.news.rss.RssParser;
+import org.example.ainewsletter.infra.news.rss.RssNewsClientFactory;
+import org.example.ainewsletter.infra.news.rss.RssNewsParser;
+import org.example.ainewsletter.infra.news.rss.SourceToRssClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +27,11 @@ public class InfraConfiguration {
     }
 
     @Bean
+    ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
+
+    @Bean
     WebClient webClient(WebClient.Builder webClientBuilder) {
         final ExchangeStrategies strategies = ExchangeStrategies.builder()
             .codecs(configurer -> configurer
@@ -36,20 +45,19 @@ public class InfraConfiguration {
     }
 
     @Bean
-    List<NewsClient> rssNewsClients(
+    RssNewsClientFactory rssNewsClientFactory(
         WebClient webClient,
-        LocalDate limitDate,
-        NewsProperties newsProperties
+        LocalDate limitDate
     ) {
-        return newsProperties.getSources().stream()
-            .map(property -> new RssNewsClient(
-                webClient,
-                new RssParser(),
-                property.url(),
-                new NewsFilter(limitDate, property.getCategories())
-            ))
-            .map(NewsClient.class::cast)
-            .toList();
+        return new RssNewsClientFactory(
+            webClient,
+            new NewsFilter(limitDate)
+        );
+    }
+
+    @Bean
+    SourceToClient sourceToRssClient(RssNewsClientFactory rssNewsClientFactory){
+        return new SourceToRssClient(objectMapper(), rssNewsClientFactory);
     }
 
 

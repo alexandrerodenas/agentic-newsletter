@@ -49,23 +49,7 @@ public final class News {
     }
 
     public boolean isValid(NewsFilter filter) {
-        if(this.published.isBefore(filter.limitDate())){
-            return false;
-        }
-
-        if (filter.categories().isEmpty()) {
-            return true;
-        }
-
-        for(String category : this.categories){
-            for(String categoryFilter : filter.categories()){
-                if(category.equalsIgnoreCase(categoryFilter)){
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return this.published.isAfter(filter.limitDate());
     }
 
     @Override

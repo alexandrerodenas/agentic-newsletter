@@ -8,7 +8,7 @@ import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.web.client.RestClient;
 
-public class OllamaWebSearch implements Function<SearchRequest, SearchResponse> {
+public final class OllamaWebSearch implements Function<SearchRequest, SearchResponse> {
 
     private final RestClient restClient;
 
@@ -38,7 +38,7 @@ public class OllamaWebSearch implements Function<SearchRequest, SearchResponse> 
 
     public record SearchResponse(List<SearchResult> results) {
 
-        record SearchResult(String title, String url, String content) {
+        public record SearchResult(String title, String url, String content) {
 
         }
     }

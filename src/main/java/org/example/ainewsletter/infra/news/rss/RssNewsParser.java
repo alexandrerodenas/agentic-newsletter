@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.example.ainewsletter.core.model.news.News;
 
-public final class RssParser {
+public final class RssNewsParser {
 
     public List<News> parse(final String rssXml) throws IOException, FeedException {
         final XmlReader xmlReader = new XmlReader(
