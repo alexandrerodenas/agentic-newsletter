@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Component
 @ConfigurationProperties(prefix = "news")
-public final class NewsProperties {
+final class NewsProperties {
 
     private List<Source> sources;
 
