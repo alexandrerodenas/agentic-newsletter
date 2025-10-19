@@ -374,7 +374,7 @@ public class AgentConfig {
 
             %s
 
-            Génére le code HTML complet en respectant toutes les contraintes ci-dessus.
+            Génère le code HTML complet en respectant toutes les contraintes ci-dessus.
             """;
 
         return (data) -> new Prompt(
@@ -403,7 +403,7 @@ public class AgentConfig {
 
             %s
 
-            Fournis uniquement les URLs des flux rss, une par ligne, sans autre texte. Pas besoin d'explications.
+            Fournis uniquement les URLs des flux rss, une par ligne, sans autre texte. Pas besoin d'explications. Assure toi que les flux sont actifs (http code 200) et pertinents.
             """;
 
         final PromptProvider promptProvider = (data) -> new Prompt(
