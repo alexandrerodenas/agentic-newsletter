@@ -399,7 +399,7 @@ public class AgentConfig {
             Tu utilises l'outil de recherche web pour répondre à la question posée par l'utilisateur.
             """;
         final String user = """
-            Liste les flux rss technologiques les plus pertinents pour recueillir des articles récents sur le sujet suivant :
+            Liste les flux rss technologiques les plus pertinents pour recueillir des articles récents sur le sujet suivant, privilégie des sources françaises reconnues :
 
             %s
 
