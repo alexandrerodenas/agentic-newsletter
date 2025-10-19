@@ -22,6 +22,8 @@ public final class FetchNews {
     ) {
         this.newsClients = newsClients;
         this.newsAgent = newsAgent;
+        log.info("FetchNews use case initialized with {} news clients", newsClients.size());
+        log.info("News Agent initialized: {}", newsAgent.getClass().getSimpleName());
     }
 
     public String aggregateNews() {

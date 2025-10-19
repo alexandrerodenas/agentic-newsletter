@@ -2,6 +2,7 @@ package org.example.ainewsletter.application.configuration;
 
 import java.time.LocalDate;
 import java.util.List;
+import org.example.ainewsletter.core.model.news.NewsClient;
 import org.example.ainewsletter.core.model.news.NewsFilter;
 import org.example.ainewsletter.infra.news.rss.RssNewsClient;
 import org.example.ainewsletter.infra.news.rss.RssParser;
@@ -21,7 +22,7 @@ public class InfraConfiguration {
     }
 
     @Bean
-    List<RssNewsClient> rssNewsClients(
+    List<NewsClient> rssNewsClients(
         WebClient.Builder webClientBuilder,
         LocalDate limitDate,
         NewsProperties newsProperties
@@ -33,6 +34,7 @@ public class InfraConfiguration {
                 property.url(),
                 new NewsFilter(limitDate, property.getCategories())
             ))
+            .map(NewsClient.class::cast)
             .toList();
     }
 

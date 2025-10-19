@@ -1,5 +1,6 @@
 package org.example.ainewsletter.application.configuration;
 
+import org.example.ainewsletter.core.model.agent.Agent;
 import org.example.ainewsletter.infra.agent.PromptProvider;
 import org.example.ainewsletter.infra.agent.SpringAiAgent;
 import org.springframework.ai.chat.messages.SystemMessage;
@@ -54,7 +55,7 @@ public class AgentConfig {
     }
 
     @Bean
-    SpringAiAgent newsAgent(PromptProvider summaryPromptProvider, ChatModel chatModel) {
+    Agent newsAgent(PromptProvider summaryPromptProvider, ChatModel chatModel) {
         return new SpringAiAgent("News", summaryPromptProvider, chatModel);
     }
 
