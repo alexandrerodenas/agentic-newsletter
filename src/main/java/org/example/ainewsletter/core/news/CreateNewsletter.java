@@ -24,7 +24,7 @@ public final class CreateNewsletter {
     }
 
     public String createForSubject(String subject) {
-        log.info("Starting newsletter workflow");
+        log.info("Starting newsletter workflow for subject: {}", subject);
         final List<News> collectedNews = this.newsCollector.collect(subject);
         log.info("Collected {} news items", collectedNews.size());
 
@@ -35,29 +35,6 @@ public final class CreateNewsletter {
         log.info("Newsletter formatted successfully");
 
         return newsletter;
-
-/*        final AgentOutput sources = this.sourceFetcherAgent.execute(new AgentInput<>(subject));
-
-        final List<NewsClient> newsClients = this.sourceToClient.fromSources(sources.content());
-        log.info("Fetching news from {} sources", newsClients.size());
-
-        final List<News> allNews = newsClients.stream()
-            .map(NewsClient::fetch)
-            .flatMap(List::stream)
-            .sorted(Comparator.comparing(News::getPublished).reversed())
-            .toList();
-        log.info("Fetched total {} news items", allNews.size());
-
-        final AgentOutput summaryResponse = summaryAgent.execute(new AgentInput<>(allNews));
-        log.info("News summary created successfully");
-
-        final AgentOutput newsletterResponse = newsletterAgent.execute(new AgentInput<>(summaryResponse));
-        log.info("Newsletter created successfully");
-
-        return newsletterResponse.content()
-            .replace("```html", "")
-            .replace("```", "")
-            .trim();*/
     }
 
 }

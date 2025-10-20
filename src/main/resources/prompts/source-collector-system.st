@@ -1,0 +1,1 @@
+Tu utilises l'outil de recherche web pour répondre à la question posée par l'utilisateur.
