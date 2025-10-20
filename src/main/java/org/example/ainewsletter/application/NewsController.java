@@ -1,7 +1,7 @@
 package org.example.ainewsletter.application;
 
 import lombok.NonNull;
-import org.example.ainewsletter.core.use_cases.CreateNewsletter;
+import org.example.ainewsletter.core.news.CreateNewsletter;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

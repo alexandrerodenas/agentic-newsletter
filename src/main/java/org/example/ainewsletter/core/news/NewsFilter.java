@@ -1,4 +1,4 @@
-package org.example.ainewsletter.core.model.news;
+package org.example.ainewsletter.core.news;
 
 import java.time.LocalDate;
 import lombok.Builder;

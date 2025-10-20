@@ -8,7 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import org.example.ainewsletter.core.model.news.News;
+import org.example.ainewsletter.core.news.News;
 
 public final class RssNewsParser {
 

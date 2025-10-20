@@ -1,6 +1,6 @@
 package org.example.ainewsletter.infra.news.rss;
 
-import org.example.ainewsletter.core.model.news.NewsFilter;
+import org.example.ainewsletter.core.news.NewsFilter;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public final class RssNewsClientFactory {

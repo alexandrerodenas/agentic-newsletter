@@ -1,11 +1,9 @@
 package org.example.ainewsletter.application.configuration;
 
-import java.util.List;
-import org.example.ainewsletter.core.model.agent.Agent;
-import org.example.ainewsletter.core.model.news.NewsClient;
-import org.example.ainewsletter.core.model.news.SourceToClient;
-import org.example.ainewsletter.core.use_cases.CreateNewsletter;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.example.ainewsletter.core.news.CreateNewsletter;
+import org.example.ainewsletter.core.news.services.NewsCollector;
+import org.example.ainewsletter.core.news.services.NewsletterFormatter;
+import org.example.ainewsletter.core.news.services.PressReviewer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,16 +12,14 @@ public class UseCasesConfig {
 
     @Bean
     CreateNewsletter createNewsletter(
-        SourceToClient sourceToClient,
-        @Qualifier("summaryAgent") Agent summaryAgent,
-        @Qualifier("newsletterAgent") Agent newsletterAgent,
-        @Qualifier("sourceFetcherAgent") Agent sourceFetcherAgent
+        final NewsCollector newsCollector,
+        final PressReviewer pressReviewer,
+        final NewsletterFormatter newsletterFormatter
     ) {
         return new CreateNewsletter(
-            sourceToClient,
-            sourceFetcherAgent,
-            summaryAgent,
-            newsletterAgent
+            newsCollector,
+            pressReviewer,
+            newsletterFormatter
         );
     }
 }

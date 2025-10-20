@@ -1,13 +1,14 @@
-package org.example.ainewsletter.infra.agent;
+package org.example.ainewsletter.infra.agent.tools;
 
 import java.util.List;
 import java.util.Optional;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.example.ainewsletter.core.model.agent.Agent;
-import org.example.ainewsletter.core.model.agent.AgentInput;
-import org.example.ainewsletter.core.model.agent.AgentOutput;
+import org.example.ainewsletter.infra.agent.Agent;
+import org.example.ainewsletter.infra.agent.AgentInput;
+import org.example.ainewsletter.infra.agent.AgentOutput;
+import org.example.ainewsletter.infra.agent.PromptProvider;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;

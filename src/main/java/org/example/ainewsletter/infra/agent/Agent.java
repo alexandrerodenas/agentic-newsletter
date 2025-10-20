@@ -1,4 +1,4 @@
-package org.example.ainewsletter.core.model.agent;
+package org.example.ainewsletter.infra.agent;
 
 public interface Agent {
 

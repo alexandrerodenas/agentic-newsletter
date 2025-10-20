@@ -1,7 +1,9 @@
-package org.example.ainewsletter.core.model.news;
+package org.example.ainewsletter.core.news.services;
 
 import java.util.List;
 import lombok.NonNull;
+import org.example.ainewsletter.core.news.News;
+import org.example.ainewsletter.core.news.NewsFilter;
 
 public abstract class NewsClient {
     protected final NewsFilter filter;

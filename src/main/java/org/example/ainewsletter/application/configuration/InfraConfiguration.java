@@ -1,15 +1,16 @@
 package org.example.ainewsletter.application.configuration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
-import java.util.List;
-import org.example.ainewsletter.core.model.news.NewsClient;
-import org.example.ainewsletter.core.model.news.NewsFilter;
-import org.example.ainewsletter.core.model.news.SourceToClient;
-import org.example.ainewsletter.infra.news.rss.RssNewsClient;
+import org.example.ainewsletter.core.news.NewsFilter;
+import org.example.ainewsletter.core.news.services.NewsCollector;
+import org.example.ainewsletter.core.news.services.NewsletterFormatter;
+import org.example.ainewsletter.core.news.services.PressReviewer;
+import org.example.ainewsletter.infra.agent.Agent;
+import org.example.ainewsletter.infra.news.AiNewsletterFormatter;
+import org.example.ainewsletter.infra.news.AiPressReviewer;
+import org.example.ainewsletter.infra.news.AiRssNewsCollector;
 import org.example.ainewsletter.infra.news.rss.RssNewsClientFactory;
-import org.example.ainewsletter.infra.news.rss.RssNewsParser;
-import org.example.ainewsletter.infra.news.rss.SourceToRssClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,11 +28,6 @@ public class InfraConfiguration {
     }
 
     @Bean
-    ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
-
-    @Bean
     WebClient webClient(WebClient.Builder webClientBuilder) {
         final ExchangeStrategies strategies = ExchangeStrategies.builder()
             .codecs(configurer -> configurer
@@ -39,7 +35,7 @@ public class InfraConfiguration {
                 .maxInMemorySize(10 * 1024 * 1024)) // 10 MB
             .build();
 
-       return webClientBuilder
+        return webClientBuilder
             .exchangeStrategies(strategies)
             .build();
     }
@@ -56,9 +52,25 @@ public class InfraConfiguration {
     }
 
     @Bean
-    SourceToClient sourceToRssClient(RssNewsClientFactory rssNewsClientFactory){
-        return new SourceToRssClient(objectMapper(), rssNewsClientFactory);
+    NewsCollector newsCollector(
+        @Qualifier("sourceCollectorAgent") Agent sourceCollectorAgent,
+        RssNewsClientFactory rssNewsClientFactory
+    ) {
+        return new AiRssNewsCollector(sourceCollectorAgent, rssNewsClientFactory);
     }
 
+    @Bean
+    PressReviewer pressReviewer(
+        @Qualifier("pressReviewerAgent") Agent pressReviewerAgent
+    ) {
+        return new AiPressReviewer(pressReviewerAgent);
+    }
+
+    @Bean
+    NewsletterFormatter newsletterFormatter(
+        @Qualifier("newsletterFormatterAgent") Agent newsletterFormatterAgent
+    ) {
+        return new AiNewsletterFormatter(newsletterFormatterAgent);
+    }
 
 }

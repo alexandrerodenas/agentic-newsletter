@@ -1,4 +1,4 @@
-package org.example.ainewsletter.core.model.news;
+package org.example.ainewsletter.core.news;
 
 import com.rometools.rome.feed.synd.SyndCategory;
 import com.rometools.rome.feed.synd.SyndContent;
@@ -59,11 +59,13 @@ public final class News {
                     Date: %s
                     Description: %s
                     Lien: %s
+                    Categories: %s
                     """,
             this.title,
             this.published,
             this.description,
-            this.link
+            this.link,
+            this.categories
         );
     }
 }

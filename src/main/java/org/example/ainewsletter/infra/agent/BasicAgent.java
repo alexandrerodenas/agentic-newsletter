@@ -4,9 +4,6 @@ import java.util.Optional;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.example.ainewsletter.core.model.agent.Agent;
-import org.example.ainewsletter.core.model.agent.AgentInput;
-import org.example.ainewsletter.core.model.agent.AgentOutput;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 

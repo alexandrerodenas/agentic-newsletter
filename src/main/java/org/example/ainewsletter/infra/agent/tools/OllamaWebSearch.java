@@ -1,9 +1,9 @@
-package org.example.ainewsletter.infra.agent;
+package org.example.ainewsletter.infra.agent.tools;
 
 import java.util.List;
 import java.util.function.Function;
-import org.example.ainewsletter.infra.agent.OllamaWebSearch.SearchRequest;
-import org.example.ainewsletter.infra.agent.OllamaWebSearch.SearchResponse;
+import org.example.ainewsletter.infra.agent.tools.OllamaWebSearch.SearchRequest;
+import org.example.ainewsletter.infra.agent.tools.OllamaWebSearch.SearchResponse;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.web.client.RestClient;
