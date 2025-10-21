@@ -20,6 +20,8 @@
     <rome.version>2.1.0</rome.version>
     <lombok.version>1.18.42</lombok.version>
     <jsoup.version>1.18.1</jsoup.version>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
   </properties>
   <dependencies>
     <dependency>
