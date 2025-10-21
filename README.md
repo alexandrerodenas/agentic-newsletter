@@ -9,21 +9,6 @@ Un projet Spring Boot expérimental qui génère automatiquement une newsletter 
 > Objectif : démontrer un pipeline agentique pour l'agrégation intelligente d'actualités autour d'un thème (ex: IA, cybersécurité, énergie, climat...).
 
 ---
-## Sommaire
-- [Architecture](#architecture)
-- [Structure du code](#structure-du-code)
-- [Flux fonctionnel](#flux-fonctionnel)
-- [Prérequis](#prérequis)
-- [Configuration](#configuration)
-- [Installation & Build](#installation--build)
-- [Exécution](#exécution)
-- [Utilisation de l'API](#utilisation-de-lapi)
-- [Personnalisation](#personnalisation)
-- [Sécurité & Limites](#sécurité--limites)
-- [Améliorations possibles](#améliorations-possibles)
-- [FAQ rapide](#faq-rapide)
-
----
 ## Architecture hexagonale
 Le projet suit une séparation claire :
 
